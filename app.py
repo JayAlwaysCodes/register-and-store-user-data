@@ -4,6 +4,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
+from kivy.uix.popup import Popup
 
 class RegistrationApp(App):
     def build(self):
@@ -27,7 +28,7 @@ class RegistrationApp(App):
         self.confirmPassword_input = TextInput(multiline=False, font_size=18, password=True)
 
         #submit button
-        submit_button = Button(text='Register', font_size=18)
+        submit_button = Button(text='Register', font_size=18, on_press=self.register)
 
 
 
@@ -42,6 +43,32 @@ class RegistrationApp(App):
         layout.add_widget(self.confirmPassword_input)
         layout.add_widget(submit_button)
         return layout
+
+    def register(self, instance):
+        #collect user details
+        name = self.name_input.text
+        email = self.email_input.text
+        password = self.password_input.text
+        confirm_password = self.confirmPassword_input.text
+
+        #validation 
+        if name.strip() == '' or email.strip() == '' or password.strip =='' or confirm_password.strip=='':
+            message = "Please fill in all fields"
+        elif password != confirm_password:
+            message = "Enter a match password"
+
+        else:
+            filename = name + '.txt'
+            with open(filename, 'w') as file:
+                file.write('Full Name: {}\n'.format(name))
+                file.write('Email Address: {}\n'.format(name))
+                file.write('Password: {}\n'.format(password))
+            message = "Details Saved Succesfully!\nFull Name: {}\nEmail Address: {}".format(name, email)
+
+        #notification
+        popup = Popup(title = "Registration Status", content=Label(text=message), size_hint=(None, None), size=(400, 200))
+        popup.open()
+
 
 
 if __name__ == '__main__':
