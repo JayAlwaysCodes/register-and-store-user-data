@@ -8,10 +8,10 @@ from kivy.uix.popup import Popup
 
 class RegistrationApp(App):
     def build(self):
-        self.title = "Registration Form"
+        self.title = "Save Your Details"
         layout = BoxLayout(orientation='vertical', padding=30, spacing=10)
 
-        head_lable = Label(text="User Registration App", font_size=26, bold=True, height=40)
+        head_lable = Label(text="Your Details App", font_size=26, bold=True, height=40)
 
         #adding input lables and fields
 
@@ -28,7 +28,7 @@ class RegistrationApp(App):
         self.confirmPassword_input = TextInput(multiline=False, font_size=18, password=True)
 
         #submit button
-        submit_button = Button(text='Register', font_size=18, on_press=self.register)
+        submit_button = Button(text='Save', font_size=18, on_press=self.register)
 
 
 
@@ -55,7 +55,7 @@ class RegistrationApp(App):
         if name.strip() == '' or email.strip() == '' or password.strip =='' or confirm_password.strip=='':
             message = "Please fill in all fields"
         elif password != confirm_password:
-            message = "Enter a match password"
+            message = "Enter a matching password"
 
         else:
             filename = name + '.txt'
@@ -66,7 +66,7 @@ class RegistrationApp(App):
             message = "Details Saved Succesfully!\nFull Name: {}\nEmail Address: {}".format(name, email)
 
         #notification
-        popup = Popup(title = "Registration Status", content=Label(text=message), size_hint=(None, None), size=(400, 200))
+        popup = Popup(title = "Status", content=Label(text=message), size_hint=(None, None), size=(400, 200))
         popup.open()
 
 
