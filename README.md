@@ -1,1 +1,1 @@
-# rehister-and-store-user-data
+# Registers and Stores user's details 
